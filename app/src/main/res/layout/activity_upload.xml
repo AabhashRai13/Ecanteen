@@ -34,7 +34,7 @@
         android:layout_marginBottom="98dp" />
 
     <ImageView
-        android:id="@+id/uploadimageview"
+        android:id="@+id/upload_imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/progressbar"
@@ -50,7 +50,6 @@
         android:layout_marginBottom="43dp"
         android:text="Upload"
         tools:text="Upload" />
-
 
 
 </RelativeLayout>
