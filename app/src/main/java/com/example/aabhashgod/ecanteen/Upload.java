@@ -14,13 +14,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class  Upload extends AppCompatActivity {
+public class Upload extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
     private Button mButtonChoosgeImage;
     private Button mButtonUpload;
-
     private EditText mEditTextFileName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
@@ -35,7 +34,7 @@ public class  Upload extends AppCompatActivity {
         mButtonChoosgeImage = findViewById(R.id.button_choose_image);
         mButtonUpload = findViewById(R.id.uploadbutton);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
-        mImageView = findViewById(R.id.imageView);
+        mImageView = findViewById(R.id.upload_imageView);
         mProgressBar = findViewById(R.id.progressbar);
 
         mButtonChoosgeImage.setOnClickListener(new View.OnClickListener() {
@@ -52,18 +51,19 @@ public class  Upload extends AppCompatActivity {
             }
         });
     }
-        private void openFileChooser() {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intent, PICK_IMAGE_REQUEST);
-        }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null ){
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             mImageUri = data.getData();
             Picasso.with(this).load(mImageUri).into(mImageView);
         }
