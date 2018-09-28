@@ -35,7 +35,7 @@ public class  Upload extends AppCompatActivity {
         mButtonChoosgeImage = findViewById(R.id.button_choose_image);
         mButtonUpload = findViewById(R.id.uploadbutton);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
-        mImageView = findViewById(R.id.imageView);
+        mImageView = findViewById(R.id.uploadimageview);
         mProgressBar = findViewById(R.id.progressbar);
 
         mButtonChoosgeImage.setOnClickListener(new View.OnClickListener() {
