@@ -43,5 +43,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="TextViewStyle" >
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">#dbf356</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    </style>
+    <style name= "MainStyle">
+        <item name="android:background">#FFB6C1</item>
+
+    </style>
 
 </resources>
