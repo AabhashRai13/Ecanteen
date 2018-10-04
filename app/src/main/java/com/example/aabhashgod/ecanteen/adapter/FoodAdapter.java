@@ -24,7 +24,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.holder> {
 
     private List<MenuModel> menuModelClasses;
     private Context context;
-    private ClickListenerEvents  clickListenerEvents;
+    private ClickListenerEvents clickListenerEvents;
     private int counter = 0;
 
 
@@ -41,7 +41,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.holder> {
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickListenerEvents.onItemClick(v,menuHolder.getPosition());
+                clickListenerEvents.onItemClick(v, menuHolder.getPosition());
             }
         });
         return menuHolder;
@@ -77,11 +77,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.holder> {
             vehicleImage = itemView.findViewById(R.id.imageView);
             add_item = itemView.findViewById(R.id.add_item);
         }
-        public void onClick(){
 
-                }
-            };
+        public void onClick() {
 
         }
+
+
+    }
+}
 
 

@@ -5,14 +5,13 @@
     android:id="@+id/card_view"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="8dp"
-    card_view:cardElevation="10sp"
-    card_view:cardUseCompatPadding="true"
-    android:background="#FFEFD5">
+    card_view:cardElevation="3dp"
+    card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="#FFEE58">
+        android:background="#fffde7">
 
 
         <TextView
@@ -60,7 +59,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="38dp"
             android:text="Add to plate"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:background="#ffb300"/>
     </RelativeLayout>
 
 
