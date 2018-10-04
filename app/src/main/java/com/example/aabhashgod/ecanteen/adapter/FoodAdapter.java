@@ -3,11 +3,13 @@ package com.example.aabhashgod.ecanteen.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +25,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.holder> {
     private List<MenuModel> menuModelClasses;
     private Context context;
     private ClickListenerEvents  clickListenerEvents;
+    private int counter = 0;
+
 
     public FoodAdapter(List<MenuModel> menuModelClasses, Context context, ClickListenerEvents clickListenerEvents) {
         this.menuModelClasses = menuModelClasses;
@@ -62,6 +66,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.holder> {
         CardView vehicleCard;
         TextView vehicleName, vehicleShortDetail, vehiclePrice;
         ImageView vehicleImage;
+        Button add_item;
 
         holder(View itemView) {
             super(itemView);
@@ -70,7 +75,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.holder> {
             vehicleShortDetail = itemView.findViewById(R.id.txt_short_details);
             vehiclePrice = itemView.findViewById(R.id.txt_rate);
             vehicleImage = itemView.findViewById(R.id.imageView);
+            add_item = itemView.findViewById(R.id.add_item);
         }
-    }
+        public void onClick(){
 
-}
+                }
+            };
+
+        }
+
+

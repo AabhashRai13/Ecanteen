@@ -27,6 +27,7 @@ public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView foodList;
+    private int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class MenuActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MenuActivity.this, "Upload Function Comming Soon", Toast.LENGTH_SHORT).show();
+                counter++;
             }
         });
 
@@ -78,9 +79,9 @@ public class MenuActivity extends AppCompatActivity
     public List<MenuModel> initializeData() {
         List<MenuModel> menuModelClasses = new ArrayList<>();
         menuModelClasses.add(new MenuModel("MoMo", "Delicious MoMo in Town", "95", R.drawable.momo));
-        menuModelClasses.add(new MenuModel("Chowmein", "veiyc", "35", R.drawable.chowmin));
-        menuModelClasses.add(new MenuModel("coke", "iaygeviyaveiyc", "50", R.drawable.coke));
-        menuModelClasses.add(new MenuModel("Egg", "iaygeviyaveiyc", "25", R.drawable.egg));
+        menuModelClasses.add(new MenuModel("Chowmein", "Spice your life", "35", R.drawable.chowmin));
+        menuModelClasses.add(new MenuModel("coke", "Chiso bhanekai coco cola", "50", R.drawable.coke));
+        menuModelClasses.add(new MenuModel("Egg", "Boiled egg", "25", R.drawable.egg));
 
 
         return menuModelClasses;
