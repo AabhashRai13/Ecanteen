@@ -1,7 +1,6 @@
 package com.example.aabhashgod.ecanteen.adapter;
 
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -24,27 +23,30 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.holder> {
 
     private List<MenuModel> menuModelClasses;
     private Context context;
-    private ClickListenerEvents  clickListenerEvents;
-    private int counter = 0;
+    private ClickListenerEvents clickListenerEvents;
 
 
-    public FoodAdapter(List<MenuModel> menuModelClasses, Context context, ClickListenerEvents clickListenerEvents) {
+    public FoodAdapter(List<MenuModel> menuModelClasses, Context context) {
         this.menuModelClasses = menuModelClasses;
         this.context = context;
-        this.clickListenerEvents = clickListenerEvents;
     }
 
     @Override
     public FoodAdapter.holder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false);
-        final holder menuHolder = new holder(v);
+        final holder menuHolder = new holder(v, clickListenerEvents);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickListenerEvents.onItemClick(v,menuHolder.getPosition());
+
             }
         });
         return menuHolder;
+    }
+
+    public void setOnItemClickListener(ClickListenerEvents listener) {
+        clickListenerEvents = listener;
+
     }
 
     @Override
@@ -61,14 +63,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.holder> {
         return menuModelClasses.size();
     }
 
-    class holder extends RecyclerView.ViewHolder {
+    class holder extends RecyclerView.ViewHolder  {
 
         CardView vehicleCard;
         TextView vehicleName, vehicleShortDetail, vehiclePrice;
         ImageView vehicleImage;
         Button add_item;
 
-        holder(View itemView) {
+        holder(View itemView, final ClickListenerEvents clickListenerEvents) {
             super(itemView);
             vehicleCard = itemView.findViewById(R.id.card_view);
             vehicleName = itemView.findViewById(R.id.txt_name);
@@ -76,12 +78,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.holder> {
             vehiclePrice = itemView.findViewById(R.id.txt_rate);
             vehicleImage = itemView.findViewById(R.id.imageView);
             add_item = itemView.findViewById(R.id.add_item);
-        }
-        public void onClick(){
-
+            add_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (clickListenerEvents != null) {
+                        int position = getAdapterPosition();
+                        clickListenerEvents.onAddClick(position);
+                    }
                 }
-            };
-
+            });
         }
+    }
+}
 
 

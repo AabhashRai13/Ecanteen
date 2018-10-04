@@ -28,62 +28,78 @@ public class MenuActivity extends AppCompatActivity
 
     private RecyclerView foodList;
     private int counter = 0;
+    private FoodAdapter foodAdapter;
+    List<MenuModel> list = initializeData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        initializeView();
+        buildRecyclerView();
+    }
+
+    public void changeItemQuantity(int position, String quantity) {
+        list.get(position).addQuantity(quantity);
+        foodAdapter.notifyItemChanged(position);
+
+    }
+
+    public void initializeView() {
+        //Initializing View Elements
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        initializeView();
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                counter++;
+                //OnClick Method For FAB
             }
         });
-
+        //Initializing Navigation Drawer
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
+        //On menuItemClick of NAV bar
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-        foodList.setHasFixedSize(true);
-
-        List<MenuModel> list = initializeData();
-
-        FoodAdapter FoodAdapter = new FoodAdapter(list, this, new ClickListenerEvents() {
-            @Override
-            public void onItemClick(View v, int position) {
-
-            }
-        });
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        foodList.setLayoutManager(linearLayoutManager);
-        foodList.setAdapter(FoodAdapter);
-        FoodAdapter.notifyDataSetChanged();
     }
 
-    public void initializeView() {
+    public void buildRecyclerView() {
+        //Initializing RecyclerView
         foodList = findViewById(R.id.foodContainer);
+        //Initializing Adapter
+        foodAdapter = new FoodAdapter(list, this);
+        //Setting HasFixedSize property to RecyclerView
+        foodList.setHasFixedSize(true);
+        //Declaring and Initializing LinearLayout
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        //Setting LinearLayout on RecyclerView
+        foodList.setLayoutManager(linearLayoutManager);
+        //Setting Adapter on RecyclerView
+        foodList.setAdapter(foodAdapter);
+        //Handling click events on RecyclerView
+        foodAdapter.setOnItemClickListener(new ClickListenerEvents() {
+
+            @Override
+            public void onAddClick(int position) {
+                counter++;
+                changeItemQuantity(position, "Added X 0" + counter);
+            }
+        });
+        //Notifying DataSetChanged on RecyclerView
+        foodAdapter.notifyDataSetChanged();
 
     }
 
     public List<MenuModel> initializeData() {
         List<MenuModel> menuModelClasses = new ArrayList<>();
-        menuModelClasses.add(new MenuModel("MoMo", "Delicious MoMo in Town", "95", R.drawable.momo));
-        menuModelClasses.add(new MenuModel("Chowmein", "Spice your life", "35", R.drawable.chowmin));
-        menuModelClasses.add(new MenuModel("coke", "Chiso bhanekai coco cola", "50", R.drawable.coke));
-        menuModelClasses.add(new MenuModel("Egg", "Boiled egg", "25", R.drawable.egg));
-
-
+        menuModelClasses.add(new MenuModel("MoMo", "", "RS : 95", R.drawable.momo));
+        menuModelClasses.add(new MenuModel("Chowmein", "", "RS : 35", R.drawable.chowmin));
+        menuModelClasses.add(new MenuModel("Coke", "", "RS : 50", R.drawable.coke));
+        menuModelClasses.add(new MenuModel("Boiled Egg", "", "RS : 25", R.drawable.egg));
         return menuModelClasses;
     }
 

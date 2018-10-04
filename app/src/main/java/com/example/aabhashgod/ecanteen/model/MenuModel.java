@@ -10,6 +10,9 @@ public class MenuModel {
         this.price = price;
         this.foodId = foodId;
     }
+    public  void addQuantity(String quantity){
+        shortDetail = quantity;
+    }
 
     public void setName(String name) {
         this.name = name;

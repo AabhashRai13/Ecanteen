@@ -5,14 +5,13 @@
     android:id="@+id/card_view"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="8dp"
-    card_view:cardElevation="10sp"
-    card_view:cardUseCompatPadding="true"
-    android:background="#FFEFD5">
+    card_view:cardElevation="3dp"
+    card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="#FFEE58">
+        android:background="#fffde7">
 
 
         <TextView
@@ -21,26 +20,33 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/txt_name"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="68dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginEnd="-1dp"
             android:text=" Rs 80" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="190dp"
-            android:layout_height="163dp"
+            android:layout_width="243dp"
+            android:layout_height="175dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="3dp"
             android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             card_view:srcCompat="@drawable/khanekura" />
 
         <TextView
             android:id="@+id/txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="14dp"
-            android:layout_marginTop="11dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceLargePopupMenu"
             android:text="khane kura" />
 
         <TextView
@@ -49,17 +55,21 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/txt_name"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="43dp"
+            android:textStyle="bold"
+            android:layout_marginEnd="1dp"
             android:text="mitho cha raja" />
 
         <Button
             android:id="@+id/add_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="38dp"
-            android:text="Add to plate"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="8dp"
+            android:background="#ffb300"
+            android:text="+1"
             android:visibility="visible" />
     </RelativeLayout>
 
