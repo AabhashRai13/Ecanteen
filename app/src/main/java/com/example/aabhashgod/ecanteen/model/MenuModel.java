@@ -1,16 +1,23 @@
 package com.example.aabhashgod.ecanteen.model;
 
-public class MenuModel {
-    private String name, shortDetail, price;
-    private int foodId;
+import java.io.Serializable;
 
-    public MenuModel(String name, String shortDetail, String price, int foodId){
+public class MenuModel implements Serializable {
+    private String name;
+    private int foodId,price,shortDetail;
+
+    public MenuModel(String name, int shortDetail, int price, int foodId){
         this.name = name;
         this.shortDetail = shortDetail;
         this.price = price;
         this.foodId = foodId;
     }
-    public  void addQuantity(String quantity){
+
+    public MenuModel() {
+
+    }
+
+    public  void addQuantity(int quantity){
         shortDetail = quantity;
     }
 
@@ -18,19 +25,19 @@ public class MenuModel {
         this.name = name;
     }
 
-    public String getShortDetail() {
+    public int getShortDetail() {
         return shortDetail;
     }
 
-    public void setShortDetail(String shortDetail) {
+    public void setShortDetail(int shortDetail) {
         this.shortDetail = shortDetail;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

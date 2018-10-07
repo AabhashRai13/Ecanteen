@@ -3,6 +3,7 @@ package com.example.aabhashgod.ecanteen.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -50,10 +51,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.holder> {
     }
 
     @Override
-    public void onBindViewHolder(FoodAdapter.holder holder, int position) {
+    public void onBindViewHolder(@NonNull FoodAdapter.holder holder, int position) {
         holder.vehicleName.setText(menuModelClasses.get(position).getName());
-        holder.vehicleShortDetail.setText(menuModelClasses.get(position).getShortDetail());
-        holder.vehiclePrice.setText(menuModelClasses.get(position).getPrice());
+        holder.vehicleShortDetail.setText("" + menuModelClasses.get(position).getShortDetail());
+        holder.vehiclePrice.setText("" + menuModelClasses.get(position).getPrice());
         holder.vehicleImage.setImageResource(menuModelClasses.get(position).getFoodId());
 
     }

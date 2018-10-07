@@ -1,16 +1,11 @@
 package com.example.aabhashgod.ecanteen;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
+import android.media.PlaybackParams;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -22,20 +17,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.aabhashgod.ecanteen.adapter.ClickListenerEvents;
 import com.example.aabhashgod.ecanteen.adapter.FoodAdapter;
 import com.example.aabhashgod.ecanteen.model.MenuModel;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
+import com.example.aabhashgod.ecanteen.model.PlateModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,11 +36,15 @@ public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView foodList;
-    private int counter = 0;
+    private int foodCount = 0;
     private FoodAdapter foodAdapter;
     List<MenuModel> list = initializeData();
-    private String userDisplayName,userDisplayEmail,userPhotoURI;
-    private TextView navdisplayname,navEmail;
+    List<PlateModel> plate = initializePlate();
+    private String itemName;
+    private int itemQuantity, itemPrice;
+
+    private String userDisplayName, userDisplayEmail, userPhotoURI;
+    private TextView navdisplayname, navEmail;
     private CircleImageView navAvatar;
 
     @Override
@@ -60,7 +55,7 @@ public class MenuActivity extends AppCompatActivity
         buildRecyclerView();
     }
 
-    public void changeItemQuantity(int position, String quantity) {
+    public void changeItemQuantity(int position, int quantity) {
         list.get(position).addQuantity(quantity);
         foodAdapter.notifyItemChanged(position);
 
@@ -70,7 +65,7 @@ public class MenuActivity extends AppCompatActivity
 
         FirebaseAuth firebaseAuth;
         firebaseAuth = FirebaseAuth.getInstance();
-        if(firebaseAuth!=null){
+        if (firebaseAuth != null) {
             userDisplayName = firebaseAuth.getCurrentUser().getDisplayName();
             userDisplayEmail = firebaseAuth.getCurrentUser().getEmail();
             userPhotoURI = String.valueOf(firebaseAuth.getCurrentUser().getPhotoUrl());
@@ -82,7 +77,9 @@ public class MenuActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //OnClick Method For FAB
+                Intent startPlateActivity = new Intent(MenuActivity.this, Plate.class);
+                startPlateActivity.putExtra("key", (Serializable) list);
+                startActivity(startPlateActivity);
             }
         });
         //Initializing Navigation Drawer
@@ -97,10 +94,10 @@ public class MenuActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_menu);
-        View header=navigationView.getHeaderView(0);
+        View header = navigationView.getHeaderView(0);
         navdisplayname = header.findViewById(R.id.nav_display_name);
         navEmail = header.findViewById(R.id.nav_email);
-        navAvatar =header.findViewById(R.id.nav_image_avatar);
+        navAvatar = header.findViewById(R.id.nav_image_avatar);
         navEmail.setText(userDisplayEmail);
         navdisplayname.setText(userDisplayName);
         Picasso.with(this)
@@ -126,8 +123,9 @@ public class MenuActivity extends AppCompatActivity
 
             @Override
             public void onAddClick(int position) {
-                counter++;
-                changeItemQuantity(position, "Quantity : " + counter);
+                foodCount++;
+                startFinalOrderActivity(position);
+                changeItemQuantity(position, foodCount);
             }
         });
         //Notifying DataSetChanged on RecyclerView
@@ -135,12 +133,27 @@ public class MenuActivity extends AppCompatActivity
 
     }
 
+    private void startFinalOrderActivity(int position) {
+
+        itemName = list.get(position).getName();
+        itemQuantity = list.get(position).getShortDetail();
+        itemPrice = list.get(position).getPrice();
+        initializePlate();
+
+    }
+
+    private List<PlateModel> initializePlate() {
+        List<PlateModel> plateModels = new ArrayList<>();
+        plateModels.add(new PlateModel(itemName, itemQuantity, itemPrice));
+        return plateModels;
+    }
+
     public List<MenuModel> initializeData() {
         List<MenuModel> menuModelClasses = new ArrayList<>();
-        menuModelClasses.add(new MenuModel("MoMo", "", "RS : 95", R.drawable.momo));
-        menuModelClasses.add(new MenuModel("Chowmein", "", "RS : 35", R.drawable.chowmin));
-        menuModelClasses.add(new MenuModel("Coke", "", "RS : 50", R.drawable.coke));
-        menuModelClasses.add(new MenuModel("Boiled Egg", "", "RS : 25", R.drawable.egg));
+        menuModelClasses.add(new MenuModel("MoMo", 0, 95, R.drawable.momo));
+        menuModelClasses.add(new MenuModel("Chowmein", 0, 35, R.drawable.chowmin));
+        menuModelClasses.add(new MenuModel("Coke", 0, 56, R.drawable.coke));
+        menuModelClasses.add(new MenuModel("Boiled Egg", 0, 54, R.drawable.egg));
         return menuModelClasses;
     }
 

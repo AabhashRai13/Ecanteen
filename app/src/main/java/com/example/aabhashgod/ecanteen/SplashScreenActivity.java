@@ -5,17 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Arrays;
-import java.util.List;
-
-public class splashscreen extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
 
     public static int SPLASH_TIME = 2000;
     private FirebaseAuth auth;
@@ -37,11 +32,11 @@ public class splashscreen extends AppCompatActivity {
                     String loggedUserName;
                     loggedUserName = auth.getCurrentUser().getDisplayName();
                     Toast.makeText(context, "Welcome back  " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
-                    Intent startMenuActivity = new Intent(splashscreen.this, MenuActivity.class);
+                    Intent startMenuActivity = new Intent(SplashScreenActivity.this, MenuActivity.class);
                     startActivity(startMenuActivity);
 
                 } else {
-                    Intent startMainActivity = new Intent(splashscreen.this, MainActivity.class);
+                    Intent startMainActivity = new Intent(SplashScreenActivity.this, MainActivity.class);
                     startActivity(startMainActivity);
 
                 }
